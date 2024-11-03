@@ -16,19 +16,19 @@
 
     <div class="cards-container flex wrap center">
         <div class="card flex column">
-            <h1 class="green">4000$</h1>
+            <h1 id="income" class="green"></h1>
             <p>Income</p>
         </div>
         <div class="card flex column">
-            <h1 class="red">4000$</h1>
+            <h1 id="expenses" class="red"></h1>
             <p>Expenses</p>
         </div>
         <div class="card flex column">
-            <h1 class="green">4000$</h1>
+            <h1 id="balance" class="green"></h1>
             <p>Balance</p>
         </div>
         <div class="card flex column">
-            <h1 class="green">4000$</h1>
+            <h1 id="transactions" class="green">4000$</h1>
             <p>Transactions</p>
         </div>
     </div>
@@ -37,25 +37,25 @@
         <div class="form-container flex center wrap">
             <input type="text" id="budget_name" value="" placeholder="Budget Name">
             <input type="text" id="budget_amount" value="" placeholder="Amount">
-            <input type="submit" value="Add Amount" class="green-button">
+            <input type="submit" id="add_income" value="Add Amount" class="green-button">
         </div>
     </form>
     <form action="">
         <div class="form-container flex center wrap">
             <input type="text" id="expense_name" value="" placeholder="Expense Name">
             <input type="text" id="expense_amount" value="" placeholder="Amount">
-            <select name="" id="">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
+            <select name="" id="category">
+                <option value="grocery">grocery</option>
+                <option value="electrecity">electrecity</option>
+                <option value="water">water</option>
+                <option value="gas">gas</option>
             </select>
             <input type="date" id="date" value="" placeholder="Date">
-            <input type="submit" value="Add Expense" class="red-button">
+            <input type="submit" id="add_expense" value="Add Expense" class="red-button">
         </div>
     </form>
     
-    <table>
+    <table id="table">
         <tr>
           <th>Expense Name</th>
           <th>Amount</th>
@@ -68,7 +68,10 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
+          <td>
+            <button>Edit</button>
+            <button>Delete</button>
+          </td>
         </tr>
         <tr>
           <td></td>

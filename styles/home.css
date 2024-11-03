@@ -86,3 +86,17 @@ th, td{
     width: 10%;
     padding: 1%;
 }
+
+
+td > button{
+    padding: 2%;
+    width: 50px;
+    background-color: #3DE123;
+    color: white;
+    border-radius: 10px;
+}
+
+td > button:last-child{
+    background-color: #E12323;
+}
+

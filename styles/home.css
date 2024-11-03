@@ -58,3 +58,31 @@ body{
 .green-button{
     background-color: #3DE123;
 }
+
+
+table{
+    width: 90%;
+    border: 1px solid black;
+    display: block;
+    margin: auto;
+    text-align: center;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    overflow: auto;
+    max-height: 200px;
+    font-family: "Joan";
+}
+
+tr{
+    /* width: 100%; */
+    border: 1px solid black;
+}
+th{
+    font-size: 30px;
+    border: 1px solid black;
+
+}
+th, td{
+    width: 10%;
+    padding: 1%;
+}

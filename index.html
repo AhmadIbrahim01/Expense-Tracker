@@ -14,24 +14,45 @@
         Expense Tracker
     </h1>
 
-    <div class="cards-container flex wrap">
+    <div class="cards-container flex wrap center">
         <div class="card flex column">
-            <h1>4000$</h1>
+            <h1 class="green">4000$</h1>
             <p>Income</p>
         </div>
         <div class="card flex column">
-            <h1>4000$</h1>
-            <p>Income</p>
+            <h1 class="red">4000$</h1>
+            <p>Expenses</p>
         </div>
         <div class="card flex column">
-            <h1>4000$</h1>
-            <p>Income</p>
+            <h1 class="green">4000$</h1>
+            <p>Balance</p>
         </div>
         <div class="card flex column">
-            <h1>4000$</h1>
-            <p>Income</p>
+            <h1 class="green">4000$</h1>
+            <p>Transactions</p>
         </div>
     </div>
+
+    <form action="">
+        <div class="form-container flex center">
+            <input type="text" id="fname" value="" placeholder="Budget Name"><br><br>
+            <input type="text" id="fname" value="" placeholder="Amount"><br><br>
+            <input type="submit" value="Add Amount" class="green-button">
+        </div>
+        <div class="form-container flex center">
+            <input type="text" id="fname" value="" placeholder="Expense Name"><br><br>
+            <input type="text" id="fname" value="" placeholder="Amount"><br><br>
+            <select name="" id="">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+            <input type="date" id="fname" value="" placeholder="Date"><br><br>
+            <input type="submit" value="Add Expense" class="red-button">
+        </div>
+    </form> 
+      
 
 
 

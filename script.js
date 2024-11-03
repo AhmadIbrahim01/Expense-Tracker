@@ -31,6 +31,11 @@ const category = document.getElementById("category")
 
 const date = document.getElementById("date")
 
+
+const table = document.getElementById("table")
+
+let id = 0
+
 add_income.addEventListener("click", (e)=>{
     e.preventDefault()
     if (budget_amount.value > 0 && budget_name.value !== ""){
@@ -63,13 +68,78 @@ add_expense.addEventListener("click", (e)=>{
         balance.value = parseInt(balance.value) - parseInt(expense_amount.value)
         balance.innerText = balance.value + "$"    
         
-        amount_removed_history.push({name:expense_name.value, amount:expense_amount.value, category: category.value, date: date.value })
-
+        amount_removed_history.push({id: id, name:expense_name.value, amount:expense_amount.value, category: category.value, date: date.value })
+        id += 1
         console.log(amount_removed_history)
         console.log(amount_removed_history.length)
+        
+        table.innerHTML += 
+        `
+        <tr>
+            <td>${expense_name.value}</td>
+            <td>${expense_amount.value}</td>
+            <td>${category.value}</td>
+            <td>${date.value}</td> 
+            <td>
+                <button id="${id}">Edit</button>
+                <button>Delete</button>
+            </td>
+        </tr>    
+        `
+        expense_name.value = ""
+        expense_amount.value = ""
+        
+        // add()
     }
     expense_name.value = ""
     expense_amount.value = ""
+
+    
 })
 
 
+
+
+// function add(){
+//     for (let i = 0; i < amount_removed_history.length; i++) {
+//         const new_table_row = document.createElement("tr")
+//         new_table_row.classList = "tr"
+//         table.appendChild(new_table_row)
+    
+//         const new_table_description_1 = document.createElement("td")
+//         const new_table_description_2 = document.createElement("td")
+//         const new_table_description_3 = document.createElement("td")
+//         const new_table_description_4 = document.createElement("td")
+//         const new_table_description_5 = document.createElement("td")
+//         new_table_description_1.innerHTML = amount_removed_history[i].name
+//         new_table_description_2.innerHTML = amount_removed_history[i].amount
+//         new_table_description_3.innerHTML = amount_removed_history[i].category
+//         new_table_description_4.innerHTML = amount_removed_history[i].date
+//         new_table_description_5.innerHTML = `
+//         <button>Edit</button>
+//         <button>Delete</button>
+        
+//         `
+//         new_table_row.appendChild(new_table_description_1)
+//         new_table_row.appendChild(new_table_description_2)
+//         new_table_row.appendChild(new_table_description_3)
+//         new_table_row.appendChild(new_table_description_4)
+//         new_table_row.appendChild(new_table_description_5)
+
+//         table.innerHTML += `
+//         <tr>
+//             <td>${amount_removed_history[i].name}</td>
+//             <td>${amount_removed_history[i].amount}</td>
+//             <td>${amount_removed_history[i].category}</td>
+//             <td>${amount_removed_history[i].amount}</td>
+
+//             <td>
+//                 <button>Edit</button>
+//                 <button>Delete</button>
+//             </td>
+//         </tr>
+        
+//         `
+    
+//     }
+// }

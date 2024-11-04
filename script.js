@@ -1,3 +1,5 @@
+let amount_removed_history = JSON.parse(localStorage.getItem('transactions'));
+
 const budget_amount = document.getElementById("budget_amount")
 const budget_name = document.getElementById("budget_name")
 
@@ -17,8 +19,7 @@ transactions.innerHTML = 0
 income.innerHTML = 0
 let new_income = 0
 
-amount_added_history = []
-amount_removed_history = []
+let amount_added_history = []
 
 
 
@@ -50,7 +51,6 @@ add_income.addEventListener("click", (e)=>{
         
 
         transactions.innerHTML = number_of_transactions
-        console.log(amount_added_history)
     }
     budget_amount.value = ""
     budget_name.value = ""
@@ -70,8 +70,6 @@ add_expense.addEventListener("click", (e)=>{
         
         amount_removed_history.push({id: id, name:expense_name.value, amount:expense_amount.value, category: category.value, date: date.value })
         id += 1
-        console.log(amount_removed_history)
-        console.log(amount_removed_history.length)
         
         // table.innerHTML += 
         // `
@@ -87,7 +85,7 @@ add_expense.addEventListener("click", (e)=>{
         // </tr>    
         // `
         display()
-
+        saveToLocal()
 
         // expense_name.value = ""
         // expense_amount.value = ""
@@ -134,15 +132,27 @@ function display(){
 }
 display()
 
+function editRow(index) {
+    const row = table.rows[index + 1];
+    const name = row.cells[0].innerText;
+    const amountt = row.cells[1].innerText;
+    const categoryy = row.cells[2].innerText;
+    const datee = row.cells[3].innerText;
 
+    amount_removed_history[index].name = name
+    amount_removed_history[index].amount = amountt
+    amount_removed_history[index].category = categoryy
+    amount_removed_history[index].date = datee
+    
+    saveToLocal()
+    display()
+
+}
 
 function deleteRow(index) {
     number_of_transactions -= 1
     transactions.innerHTML = number_of_transactions
 
-    console.log("HELLO")
-    console.log(index)
-    console.log(amount_removed_history[index].amount)
 
     
     
@@ -153,5 +163,12 @@ function deleteRow(index) {
     expenses.innerHTML = expenses.value + "$"
     
     amount_removed_history.splice(index, 1);
+    saveToLocal()
+    display();
+}
+
+
+function saveToLocal() {
+    localStorage.setItem('transactions', JSON.stringify(amount_removed_history));
     display();
 }

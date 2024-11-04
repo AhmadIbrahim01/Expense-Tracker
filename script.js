@@ -10,6 +10,7 @@ const transactions = document.getElementById("transactions")
 const balance = document.getElementById("balance")
 const expenses = document.getElementById("expenses")
 
+
 balance.innerHTML = 0
 balance.value = 0
 expenses.innerHTML = 0
@@ -70,25 +71,9 @@ add_expense.addEventListener("click", (e)=>{
         
         amount_removed_history.push({id: id, name:expense_name.value, amount:expense_amount.value, category: category.value, date: date.value })
         id += 1
-        
-        // table.innerHTML += 
-        // `
-        // <tr id="${id}">
-        //     <td contenteditable="true">${expense_name.value}</td>
-        //     <td contenteditable="true">${expense_amount.value}</td>
-        //     <td contenteditable="true">${category.value}</td>
-        //     <td contenteditable="true">${date.value}</td> 
-        //     <td>
-        //         <button onclick="editRow(${id})">Save Changes</button>
-        //         <button>Delete</button>
-        //     </td>
-        // </tr>    
-        // `
+
         display()
         saveToLocal()
-
-        // expense_name.value = ""
-        // expense_amount.value = ""
         
     }
     expense_name.value = ""
@@ -131,6 +116,62 @@ function display(){
         `
 }
 display()
+
+const min = document.getElementById('min');
+min.addEventListener('click', () => {
+    applyMin();
+});
+const max = document.getElementById('max');
+max.addEventListener('click', () => {
+    applyMax();
+});
+const all = document.getElementById('all');
+all.addEventListener('click', () => {
+    display();
+});
+
+
+function applyMin() {
+    const minAmount = amount_removed_history.reduce((min, obj) => {
+        return Number(obj.amount) < Number(min.amount) ? obj : min;
+    });
+    displayFiltered(minAmount)
+}
+
+function applyMax() {
+    const maxAmount = amount_removed_history.reduce((max, obj) => {
+        return Number(obj.amount) > Number(max.amount) ? obj : max;
+    });
+    displayFiltered(maxAmount)
+}
+
+function displayFiltered(value){
+    let table_inner = ""
+        table_inner += `
+            <tr>
+                <td contenteditable="true">${value.name}</td>
+                <td contenteditable="true">${value.amount}</td>
+                <td contenteditable="true">${value.category}</td>
+                <td contenteditable="true">${value.date}</td>
+
+                <td>
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            `
+
+        table.innerHTML = `
+        <tr>
+          <th>Expense Name</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+        ${table_inner}
+        `
+}
 
 function editRow(index) {
     const row = table.rows[index + 1];

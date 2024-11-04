@@ -75,21 +75,23 @@ add_expense.addEventListener("click", (e)=>{
         
         table.innerHTML += 
         `
-        <tr>
+        <tr id="${id}">
             <td>${expense_name.value}</td>
             <td>${expense_amount.value}</td>
             <td>${category.value}</td>
             <td>${date.value}</td> 
             <td>
-                <button id="${id}">Edit</button>
+                <button>Edit</button>
                 <button>Delete</button>
             </td>
         </tr>    
         `
+        // display()
+
+
         expense_name.value = ""
         expense_amount.value = ""
         
-        // add()
     }
     expense_name.value = ""
     expense_amount.value = ""
@@ -99,47 +101,38 @@ add_expense.addEventListener("click", (e)=>{
 
 
 
+function display(){
+    let table_inner = ""
 
-// function add(){
-//     for (let i = 0; i < amount_removed_history.length; i++) {
-//         const new_table_row = document.createElement("tr")
-//         new_table_row.classList = "tr"
-//         table.appendChild(new_table_row)
-    
-//         const new_table_description_1 = document.createElement("td")
-//         const new_table_description_2 = document.createElement("td")
-//         const new_table_description_3 = document.createElement("td")
-//         const new_table_description_4 = document.createElement("td")
-//         const new_table_description_5 = document.createElement("td")
-//         new_table_description_1.innerHTML = amount_removed_history[i].name
-//         new_table_description_2.innerHTML = amount_removed_history[i].amount
-//         new_table_description_3.innerHTML = amount_removed_history[i].category
-//         new_table_description_4.innerHTML = amount_removed_history[i].date
-//         new_table_description_5.innerHTML = `
-//         <button>Edit</button>
-//         <button>Delete</button>
-        
-//         `
-//         new_table_row.appendChild(new_table_description_1)
-//         new_table_row.appendChild(new_table_description_2)
-//         new_table_row.appendChild(new_table_description_3)
-//         new_table_row.appendChild(new_table_description_4)
-//         new_table_row.appendChild(new_table_description_5)
+    for (let i = 0; i < amount_removed_history.length; i++) {
+        table_inner += `
+            <tr id="${i+1}">
+                <td>${amount_removed_history[i].name}</td>
+                <td>${amount_removed_history[i].amount}</td>
+                <td>${amount_removed_history[i].category}</td>
+                <td>${amount_removed_history[i].date}</td>
 
-//         table.innerHTML += `
-//         <tr>
-//             <td>${amount_removed_history[i].name}</td>
-//             <td>${amount_removed_history[i].amount}</td>
-//             <td>${amount_removed_history[i].category}</td>
-//             <td>${amount_removed_history[i].amount}</td>
+                <td>
+                    <button button_id ="${i+1}">Edit</button>
+                    <button>Delete</button>
+                </td>
+            </tr>
+            `
 
-//             <td>
-//                 <button>Edit</button>
-//                 <button>Delete</button>
-//             </td>
-//         </tr>
-        
-//         `
-    
-//     }
-// }
+            
+        }
+        table.innerHTML = `
+        <tr>
+          <th>Expense Name</th>
+          <th>Amount</th>
+          <th>Category</th>
+          <th>Date</th>
+          <th>Action</th>
+        </tr>
+        ${table_inner}
+        `
+}
+
+console.log(butt)
+
+display()

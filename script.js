@@ -73,24 +73,24 @@ add_expense.addEventListener("click", (e)=>{
         console.log(amount_removed_history)
         console.log(amount_removed_history.length)
         
-        table.innerHTML += 
-        `
-        <tr id="${id}">
-            <td>${expense_name.value}</td>
-            <td>${expense_amount.value}</td>
-            <td>${category.value}</td>
-            <td>${date.value}</td> 
-            <td>
-                <button>Edit</button>
-                <button>Delete</button>
-            </td>
-        </tr>    
-        `
-        // display()
+        // table.innerHTML += 
+        // `
+        // <tr id="${id}">
+        //     <td contenteditable="true">${expense_name.value}</td>
+        //     <td contenteditable="true">${expense_amount.value}</td>
+        //     <td contenteditable="true">${category.value}</td>
+        //     <td contenteditable="true">${date.value}</td> 
+        //     <td>
+        //         <button onclick="editRow(${id})">Save Changes</button>
+        //         <button>Delete</button>
+        //     </td>
+        // </tr>    
+        // `
+        display()
 
 
-        expense_name.value = ""
-        expense_amount.value = ""
+        // expense_name.value = ""
+        // expense_amount.value = ""
         
     }
     expense_name.value = ""
@@ -106,15 +106,15 @@ function display(){
 
     for (let i = 0; i < amount_removed_history.length; i++) {
         table_inner += `
-            <tr id="${i+1}">
-                <td>${amount_removed_history[i].name}</td>
-                <td>${amount_removed_history[i].amount}</td>
-                <td>${amount_removed_history[i].category}</td>
-                <td>${amount_removed_history[i].date}</td>
+            <tr id="${i}">
+                <td contenteditable="true">${amount_removed_history[i].name}</td>
+                <td contenteditable="true">${amount_removed_history[i].amount}</td>
+                <td contenteditable="true">${amount_removed_history[i].category}</td>
+                <td contenteditable="true">${amount_removed_history[i].date}</td>
 
                 <td>
-                    <button button_id ="${i+1}">Edit</button>
-                    <button>Delete</button>
+                    <button onclick="editRow(${i})">Edit</button>
+                    <button onclick="deleteRow(${i})">Delete</button>
                 </td>
             </tr>
             `
@@ -132,7 +132,26 @@ function display(){
         ${table_inner}
         `
 }
-
-console.log(butt)
-
 display()
+
+
+
+function deleteRow(index) {
+    number_of_transactions -= 1
+    transactions.innerHTML = number_of_transactions
+
+    console.log("HELLO")
+    console.log(index)
+    console.log(amount_removed_history[index].amount)
+
+    
+    
+    balance.value += parseInt(amount_removed_history[index].amount)
+    balance.innerText = balance.value + "$"
+
+    expenses.value -= parseInt(amount_removed_history[index].amount)
+    expenses.innerHTML = expenses.value + "$"
+    
+    amount_removed_history.splice(index, 1);
+    display();
+}

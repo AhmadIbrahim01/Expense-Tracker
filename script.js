@@ -1,4 +1,6 @@
 let amount_removed_history = JSON.parse(localStorage.getItem('transactions'));
+let local_income = parseInt(JSON.parse(localStorage.getItem('income')));
+let local_number_of_transactions = parseInt(JSON.parse(localStorage.getItem('transactions_count')));
 
 const budget_amount = document.getElementById("budget_amount")
 const budget_name = document.getElementById("budget_name")
@@ -15,10 +17,11 @@ balance.innerHTML = 0
 balance.value = 0
 expenses.innerHTML = 0
 expenses.value = 0
-number_of_transactions = 0
-transactions.innerHTML = 0
+let number_of_transactions = 0 + local_number_of_transactions
+transactions.innerHTML = number_of_transactions
 income.innerHTML = 0
-let new_income = 0
+let new_income = 0 + local_income 
+income.innerText = new_income + "$"
 
 let amount_added_history = []
 
@@ -42,7 +45,7 @@ add_income.addEventListener("click", (e)=>{
     e.preventDefault()
     if (budget_amount.value > 0 && budget_name.value !== ""){
         number_of_transactions += 1
-        new_income = parseInt(budget_amount.value) + parseInt(income.innerHTML)
+        new_income += parseInt(budget_amount.value)
         income.innerText = new_income + "$"
 
         balance.value = parseInt(balance.value) + parseInt(budget_amount.value)
@@ -52,6 +55,7 @@ add_income.addEventListener("click", (e)=>{
         
 
         transactions.innerHTML = number_of_transactions
+        saveToLocal()
     }
     budget_amount.value = ""
     budget_name.value = ""
@@ -73,13 +77,10 @@ add_expense.addEventListener("click", (e)=>{
         id += 1
 
         display()
-        saveToLocal()
-        
+        saveToLocal()   
     }
     expense_name.value = ""
     expense_amount.value = ""
-
-    
 })
 
 
@@ -102,7 +103,6 @@ function display(){
             </tr>
             `
 
-            
         }
         table.innerHTML = `
         <tr>
@@ -193,10 +193,7 @@ function editRow(index) {
 function deleteRow(index) {
     number_of_transactions -= 1
     transactions.innerHTML = number_of_transactions
-
-
-    
-    
+   
     balance.value += parseInt(amount_removed_history[index].amount)
     balance.innerText = balance.value + "$"
 
@@ -211,5 +208,8 @@ function deleteRow(index) {
 
 function saveToLocal() {
     localStorage.setItem('transactions', JSON.stringify(amount_removed_history));
+    localStorage.setItem('income', JSON.stringify(income.innerHTML.slice(0, income.innerHTML.length - 1)));
+    localStorage.setItem('transactions_count', JSON.stringify(number_of_transactions));
     display();
 }
+
